@@ -1,0 +1,27 @@
+.card{
+    width: 250px;
+    background-color: #fff;
+    border: 2px solid blue;
+    padding: 20px;
+}
+.card__title{
+    font-size: 16px;
+    color: blue;
+}
+.card__subtitle{
+    font-size: 14px;
+    color: #251d1d;
+}
+.card__btn-container{
+    display: block;
+    margin: 0 auto;
+}
+.btn{
+    max-width: 80px;
+    border: 2px solid blue;
+    border-radius: 5px;
+    font-size: 10px;
+}
+.btn:not(:last-child){
+    margin-right: 30px;
+}
