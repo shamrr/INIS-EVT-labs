@@ -92,18 +92,26 @@ const shirts = [{
 }];
 
 const body = document.querySelector('body');
-function createCard (shirts){
+const mainBlock = document.querySelector('.main-block');
+const cards = document.createElement('div');
+cards.className = 'cards-container';
+
+shirts.forEach((shirt) => {
     const card = document.createElement('div');
     card.className = 'card'
 
     const img = document.createElement('img');
-    img.className = 'card__img'
+    img.className = 'card__img';
+    img.alt = 't-shirt';
+    img.src = shirt.colors.white.front;
 
     const title = document.createElement('h1');
-    name.className = 'card__title';
+    title.className = 'card__title';
+    title.innerText = shirt.name
 
     const subtitle = document.createElement('div');
     subtitle.className = 'card__subtitle';
+    subtitle.innerText = shirt.description
 
     const btnContainer = document.createElement('div');
     btnContainer.className = 'card__btn-container';
@@ -111,14 +119,53 @@ function createCard (shirts){
     const btnQuickView = document.createElement('button');
     btnQuickView.className = 'btn btn__view';
     btnQuickView.innerText = 'Oquick View';
+    btnQuickView.addEventListener('click', () => {
+        createModalWindow(shirt);
+    });
 
     const btnSeePage = document.createElement('button');
     btnSeePage.className = 'btn btn__see';
     btnSeePage.innerText = 'See Page';
 
+    cards.append(card);
     btnContainer.append(btnQuickView, btnSeePage);
     card.append(img, title, subtitle, btnContainer);
-    body.append(card);
-    return card;
+    mainBlock.append(cards);
+});
+
+
+function createModalWindow(shirt){
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+
+    const modalWindow = document.createElement('div');
+    modalWindow.className = 'modal';
+
+    const modalClose = document.createElement('div');
+    modalClose.className = 'modal-close'
+    modalClose.innerText = 'x';
+    modalClose.addEventListener('click', () => {
+        overlay.style.display = 'none';
+    });
+
+    const imgFront = document.createElement('img');
+    imgFront.className = 'card__img';
+    imgFront.alt = 't-shirt';
+    imgFront.src = shirt.colors.white.front;
+
+    const imgBack = document.createElement('img');
+    imgBack.className = 'card__img';
+    imgBack.style.marginLeft = '40px'
+    imgBack.alt = 't-shirt';
+    imgBack.src = shirt.colors.white.back;
+
+    const title = document.createElement('h1');
+    title.className = 'card__title';
+    title.style.fontSize = '20px';
+    title.style.textAlign = 'center';
+    title.innerText = shirt.name;
+
+    overlay.append(modalWindow);
+    modalWindow.append(imgFront, imgBack, title, modalClose);
+    body.append(overlay);
 }
-createCard();
