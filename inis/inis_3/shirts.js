@@ -118,7 +118,7 @@ shirts.forEach((shirt) => {
 
     const btnQuickView = document.createElement('button');
     btnQuickView.className = 'btn btn__view';
-    btnQuickView.innerText = 'Oquick View';
+    btnQuickView.innerText = 'Quick View';
     btnQuickView.addEventListener('click', () => {
         createModalWindow(shirt);
     });
@@ -126,7 +126,37 @@ shirts.forEach((shirt) => {
     const btnSeePage = document.createElement('button');
     btnSeePage.className = 'btn btn__see';
     btnSeePage.innerText = 'See Page';
+    btnSeePage.addEventListener('click', () => {
+        localStorage.setItem('selectedShirt', JSON.stringify(shirt)); //JSON.stringify()используется для преобразования shirtобъекта в строку, так как локальное хранилище может хранить только строки
+        window.location.href = 'shirt-details.html';
 
+        const selectedShirt = JSON.parse(localStorage.getItem('selectedShirt'));
+        console.log(selectedShirt);
+        const imgFront = document.createElement('img');
+        imgFront.className = 'card__img';
+        imgFront.alt = 't-shirt';
+        imgFront.src = selectedShirt.colors.white.front;
+
+        const imgBack = document.createElement('img');
+        imgBack.className = 'card__img';
+        imgBack.style.marginLeft = '40px'
+        imgBack.alt = 't-shirt';
+        imgBack.src = selectedShirt.colors.white.back;
+
+        const title = document.createElement('h1');
+        title.className = 'card__title';
+        title.style.fontSize = '20px';
+        title.style.textAlign = 'center';
+        title.innerText = selectedShirt.name;
+
+        const subtitle = document.createElement('div');
+        subtitle.className = 'card__subtitle';
+        subtitle.innerText = selectedShirt.description;
+
+        const mainBlock = document.querySelector('.main-block');
+        mainBlock.append(imgFront, imgBack, title, subtitle);
+    });
+        
     cards.append(card);
     btnContainer.append(btnQuickView, btnSeePage);
     card.append(img, title, subtitle, btnContainer);
@@ -169,3 +199,5 @@ function createModalWindow(shirt){
     modalWindow.append(imgFront, imgBack, title, modalClose);
     body.append(overlay);
 }
+
+
