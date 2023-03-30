@@ -54,7 +54,7 @@ function build_goods_list(){
 document.addEventListener('click',e => {
     let id = e.target.getAttribute('id')
     localStorage.setItem('index', id)
-    window.open('http://127.0.0.1:5500/inis/inis_3/detail.html')
+    window.open('https://frabjous-blini-4dbd59.netlify.app/inis/inis_3/detail.html')
 })
 
 
