@@ -29,7 +29,7 @@ function detailView() {
   let back_link = document.createElement("a")
   back_link.classList.add("back_link")
   back_link.innerText = "Back"
-  back_link.setAttribute("href", "https://frabjous-blini-4dbd59.netlify.app/inis/inis_3/list.html")
+  back_link.setAttribute("href", "https://frabjous-blini-4dbd59.netlify.app/inis/inis_3/index.html")
 
   let detail_description = document.createElement("p")
   detail_description.classList.add("detail_description")
