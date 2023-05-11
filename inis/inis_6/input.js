@@ -66,10 +66,6 @@ targets.forEach(target => {
    }
   );
 
- 
-  target.addEventListener('touchend', function(e) {
-   console.log(isDoubleClick);
-  });
 
   target.addEventListener('touchcancel', function(e) {
      target.style.left = `${lastX}px`;
