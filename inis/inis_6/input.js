@@ -64,7 +64,6 @@ targets.forEach(target => {
    console.log(isDoubleClick);
   });
 
-=======
   target.addEventListener('touchmove', function(e) {
     console.log(isDoubleClick);
   });
