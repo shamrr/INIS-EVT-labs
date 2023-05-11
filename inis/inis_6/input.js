@@ -14,7 +14,6 @@ targets.forEach(target => {
   target.addEventListener('touchstart', function(e) {
     const touch = e.changedTouches[0];
     if (touchTimeout !== null) {
-      clearTimeout(touchTimeout);
       touchTimeout = null;
       isDoubleClick=true;
       e.preventDefault();
