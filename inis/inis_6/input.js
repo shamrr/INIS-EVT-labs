@@ -4,12 +4,9 @@ let isDoubleClick = false;
 let touchTimeout = null;
 let currentTarget = null;
 
-
-
 // Обрабатываем каждый элемент
 targets.forEach(target => {
   let startX, startY;
-
 
   target.addEventListener('touchstart', function(e) {
     const touch = e.changedTouches[0];
@@ -19,11 +16,12 @@ targets.forEach(target => {
       e.preventDefault();
       currentTarget = this;
     } else {
-        touchTimeout = setTimeout(function() {
-          currentTarget = null;
-          touchTimeout = null;
-          isDoubleClick=false;
-        }, 150);
+      touchTimeout = setTimeout(function() {
+        currentTarget = null;
+        touchTimeout = null;
+       isDoubleClick=false;
+        
+      }, 150);
     }
     startX = touch.clientX - this.offsetLeft;
     startY = touch.clientY - this.offsetTop;
@@ -31,9 +29,8 @@ targets.forEach(target => {
     lastY = target.offsetTop;
   });
 
-
   document.addEventListener('touchstart', function(e) {
-      if(isDoubleClick == true){
+     if(isDoubleClick == true){
       const touch = e.changedTouches[0];
       const x = touch.clientX - startX;
       const y = touch.clientY - startY;
@@ -43,7 +40,7 @@ targets.forEach(target => {
 });
   // Обработчик события touchmove
   target.addEventListener('touchmove', function(e) {
-    if (isDoubleClick == false){
+     if (isDoubleClick == false){
     e.preventDefault();
 
     const touch = e.changedTouches[0];
@@ -59,9 +56,15 @@ targets.forEach(target => {
       target.style.left = `${lastX}px`;
       target.style.top = `${lastY}px`;
     }
-  }
+   }
   );
 
+  
+  target.addEventListener('touchend', function(e) {
+   console.log(isDoubleClick);
+  });
+
+=======
   target.addEventListener('touchmove', function(e) {
     console.log(isDoubleClick);
   });
