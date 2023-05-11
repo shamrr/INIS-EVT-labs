@@ -29,12 +29,10 @@ targets.forEach(target => {
     }
     startX = touch.clientX - this.offsetLeft;
     startY = touch.clientY - this.offsetTop;
-    lastX = target.offsetLeft;
-    lastY = target.offsetTop;
   });
 
 
-  document.addEventListener('touchstart', function(e) {
+  document.addEventListener('touchmove', function(e) {
      if(isDoubleClick == true){
       const touch = e.changedTouches[0];
       const x = touch.clientX - startX;
@@ -47,9 +45,6 @@ targets.forEach(target => {
   target.addEventListener('touchmove', function(e) {
      if (isDoubleClick == false){
     e.preventDefault();
-
-    
-
     const touch = e.changedTouches[0];
     const x = touch.clientX - startX;
     const y = touch.clientY - startY;
@@ -58,17 +53,6 @@ targets.forEach(target => {
     this.style.left = x + 'px';
     this.style.top = y + 'px';
     }
-    if (e.touches.lenght === 2)
-    {
-      target.style.left = `${lastX}px`;
-      target.style.top = `${lastY}px`;
-    }
    }
   );
-
-
-  target.addEventListener('touchcancel', function(e) {
-     target.style.left = `${lastX}px`;
-     target.style.top = `${lastY}px`;
-   });
 });
