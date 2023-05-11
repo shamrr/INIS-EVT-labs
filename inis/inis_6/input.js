@@ -4,13 +4,17 @@ let isDoubleClick = false;
 let touchTimeout = null;
 let currentTarget = null;
 
+
+
 // Обрабатываем каждый элемент
 targets.forEach(target => {
   let startX, startY;
 
+
   target.addEventListener('touchstart', function(e) {
     const touch = e.changedTouches[0];
     if (touchTimeout !== null) {
+      clearTimeout(touchTimeout);
       touchTimeout = null;
       isDoubleClick=true;
       e.preventDefault();
@@ -29,6 +33,7 @@ targets.forEach(target => {
     lastY = target.offsetTop;
   });
 
+
   document.addEventListener('touchstart', function(e) {
      if(isDoubleClick == true){
       const touch = e.changedTouches[0];
@@ -42,6 +47,8 @@ targets.forEach(target => {
   target.addEventListener('touchmove', function(e) {
      if (isDoubleClick == false){
     e.preventDefault();
+
+    
 
     const touch = e.changedTouches[0];
     const x = touch.clientX - startX;
@@ -59,13 +66,13 @@ targets.forEach(target => {
    }
   );
 
-  
+ 
   target.addEventListener('touchend', function(e) {
    console.log(isDoubleClick);
   });
 
-  target.addEventListener('touchmove', function(e) {
-    console.log(isDoubleClick);
-  });
-
+  target.addEventListener('touchcancel', function(e) {
+     target.style.left = `${lastX}px`;
+     target.style.top = `${lastY}px`;
+   });
 });
